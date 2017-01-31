@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "name": "react-indexeddb-client-side-solution",
+    "id": "3e6934b8-9a14-4d4b-8c1c-c5563ad2baf4",
+    "version": "1.0.0.0"
+  },
+  "paths": {
+    "zippedPackage": "solution/react-indexeddb.sppkg"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "entry": "./lib/webparts/indexedDbDemo/IndexedDbDemoWebPart.js",
+      "manifest": "./src/webparts/indexedDbDemo/IndexedDbDemoWebPart.manifest.json",
+      "outputPath": "./dist/indexed-db-demo.bundle.js"
+    }
+  ],
+  "externals": {},
+  "localizedResources": {
+    "indexedDbDemoStrings": "webparts/indexedDbDemo/loc/{locale}.js"
+  }
+}

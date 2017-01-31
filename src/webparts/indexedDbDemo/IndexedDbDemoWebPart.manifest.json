@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../node_modules/@microsoft/sp-module-interfaces/lib/manifestSchemas/jsonSchemas/clientSideComponentManifestSchema.json",
+
+  "id": "d8692a1f-1dc7-46ef-beb7-a1ac8537faac",
+  "alias": "IndexedDbDemoWebPart",
+  "componentType": "WebPart",
+  "version": "0.0.1",
+  "manifestVersion": 2,
+
+  "preconfiguredEntries": [{
+    "groupId": "d8692a1f-1dc7-46ef-beb7-a1ac8537faac",
+    "group": { "default": "Under Development" },
+    "title": { "default": "indexedDB-demo" },
+    "description": { "default": "dunno" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "indexedDB-demo"
+    }
+  }]
+}
