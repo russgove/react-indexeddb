@@ -1,7 +1,7 @@
 
 // see https://visualstudiomagazine.com/articles/2016/09/01/working-with-indexeddb.aspx
 import TableInfo from "../../DBIO/TableInfo";
-import { DBIO, ManageTable,IDBCallback } from "../../DBIO/DBIO";
+import { ManageDatabase, ManageTable, IDBCallback } from "../../DBIO/DBIO";
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
@@ -73,21 +73,37 @@ export default class IndexedDbDemoWebPart extends BaseClientSideWebPart<IIndexed
     ti.PrimaryFieldName = "CustId";
     ti.PrimaryIndexName = "CustIdIndex";
     tis[0] = ti;
-    var md: DBIO;
-    md = new DBIO("CustomerOrder", tis)
-    var mt: ManageTable<Customer>;
-    mt = new ManageTable<Customer>(ti);
-    mt.db = md.db
-    mt.CreateRow(new Customer("joe", "Stamford", "1"))
-    mt.CreateRow(new Customer("jane", "Greenwich", "2"))
-    mt.DeleteRow("1");
-    mt.UpdateRow(new Customer("janet", "Greenwich", "2"));
-    mt.ReadRow("2",this);
+    var dbio: ManageDatabase;
+    dbio = new ManageDatabase("CustomerOrder", tis);
+      dbio.OpenInitDB().then(db => {
+        var mt: ManageTable<Customer>;
+        mt = new ManageTable<Customer>(ti);
+        mt.db = dbio.db
+        mt.CreateRow(new Customer("Da", "Brigeport", "4"));
+        mt.CreateRow(new Customer("sally", "Danbury", "12"));
+        mt.CreateRow(new Customer("joe", "Stamford", "1"));
+        mt.CreateRow(new Customer("jane", "Greenwich", "2"));
+        
+        mt.UpdateRow(new Customer("janet", "Greenwich", "2"));
+        mt.ReadRow("2").then((row) => {
+          console.log(row);
+        });
+        mt.DeleteRow("1");
+        mt.GetAll().then((rows) => {
+          console.log(rows);
+        });
+      });
 
-    
-    return;
+
+
+    })
+
+
+
+
+
   }
-  Refresh(cust:Customer){
+  Refresh(cust: Customer) {
     debugger;
   }
   protected get dataVersion(): Version {
