@@ -1,7 +1,7 @@
 
 // see https://visualstudiomagazine.com/articles/2016/09/01/working-with-indexeddb.aspx
 import TableInfo from "../../DBIO/TableInfo";
-import { ManageDatabase, ManageTable, IDBCallback } from "../../DBIO/DBIO";
+import { DBIO, ManageTable, IDBCallback } from "../../DBIO/DBIO";
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
@@ -45,24 +45,7 @@ export default class IndexedDbDemoWebPart extends BaseClientSideWebPart<IIndexed
 
   }
   protected onInit(): Promise<void> {
-    debugger;
-    // if ("indexedDB" in window && window.indexedDB != undefined) {
-    //   this.dbs = window.indexedDB;
-    // }
-    // if (this.dbs) {
-    //   this.dbs.deleteDatabase(this.dbName);
-    //   var req: IDBOpenDBRequest = this.dbs.open(this.dbName, 2);//0 is the vcersion
-    //   req.onupgradeneeded = (e: any) => {
-    //     debugger;
-    //     var cat = e.currentTarget.result;
-    //     this.AddCustomersTable(cat);
-    //   }
-    //   req.onsuccess = (ev: any) => {
-    //     debugger;
-    //     this.database = ev.target.result;
-    //   }
-
-    // }
+ 
     debugger;
     var ti: TableInfo;
     var tis: Array<TableInfo>;
@@ -73,8 +56,9 @@ export default class IndexedDbDemoWebPart extends BaseClientSideWebPart<IIndexed
     ti.PrimaryFieldName = "CustId";
     ti.PrimaryIndexName = "CustIdIndex";
     tis[0] = ti;
-    var dbio: ManageDatabase;
-    dbio = new ManageDatabase("CustomerOrder", tis);
+    var dbio: DBIO;
+    dbio = new DBIO("CustomerOrder", tis);
+    return dbio.DeleteDB().then(() => {
       dbio.OpenInitDB().then(db => {
         var mt: ManageTable<Customer>;
         mt = new ManageTable<Customer>(ti);
@@ -88,7 +72,7 @@ export default class IndexedDbDemoWebPart extends BaseClientSideWebPart<IIndexed
         mt.ReadRow("2").then((row) => {
           console.log(row);
         });
-        mt.DeleteRow("1");
+        
         mt.GetAll().then((rows) => {
           console.log(rows);
         });

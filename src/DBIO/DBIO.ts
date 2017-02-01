@@ -1,5 +1,5 @@
 import TableInfo from "./TableInfo";
-export class ManageDatabase  {
+export class DBIO {
 
     private IndxDb: IDBFactory;
     public db: IDBDatabase;
